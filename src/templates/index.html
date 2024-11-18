@@ -1,0 +1,36 @@
+{% extends "layout/base.html" %}
+<!-- Content -->
+{% block content %}
+<h1 class="title">Url Shortener App</h1>
+<p class="subtitle">An application made for shortening urls.</p>
+<form
+  class="shorten-form"
+  hx-post="/shorten-url"
+  hx-target="#shorten-display"
+  hx-swap="outerHTML"
+>
+  <label class="space-v-8">
+    <span>Your url:</span>
+    <input class="url-input" type="text" name="url" />
+    <span id="url-error"></span>
+  </label>
+  <button type="submit" class="submit">Shorten url</button>
+</form>
+
+<div id="shorten-display"></div>
+{% endblock content %}
+<!-- Script -->
+{% block script %}
+<script>
+  document.body.addEventListener("htmx:beforeSwap", function (ev) {
+    switch (ev.detail.xhr.status) {
+      case 400:
+        ev.detail.shouldSwap = true;
+        ev.detail.target = htmx.find("#url-error");
+        break;
+      default:
+        break;
+    }
+  });
+</script>
+{% endblock script %}
