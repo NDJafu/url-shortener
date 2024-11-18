@@ -11,7 +11,7 @@
 >
   <label class="space-v-8">
     <span>Your url:</span>
-    <input class="url-input" type="text" name="url" />
+    <input class="url-input" type="text" name="url" onkeydown="clearError()" />
     <span id="url-error"></span>
   </label>
   <button type="submit" class="submit">Shorten url</button>
@@ -32,5 +32,9 @@
         break;
     }
   });
+
+  function clearError() {
+    document.getElementById("url-error").innerHTML = "";
+  }
 </script>
 {% endblock script %}

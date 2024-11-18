@@ -33,6 +33,7 @@ async fn shorten_url(form: web::Form<FormData>) -> impl Responder {
     match valid_url.is_match(&form.url) {
         true => {
             let shortened_url = shortener::instance().shorten(&form.url);
+            context.insert("before", &form.url);
             context.insert("url", &shortened_url);
             let html = render_template("response/shortened_url.html", &context);
             HttpResponse::Ok()

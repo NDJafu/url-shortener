@@ -1,5 +1,12 @@
 <div id="shorten-display">
-  <code> {{ url }} </code>
+  <code>
+    <strong style="color: rgb(90, 90, 90)">
+      {{ before }} is now shorten to:
+    </strong>
+    <br />
+    <br />
+    {{ url }}
+  </code>
   <button hx-on:click="navigator.clipboard.writeText('{{ url }}')">
     <svg
       xmlns="http://www.w3.org/2000/svg"
